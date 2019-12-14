@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Uno</title>
+	<script type="text/javascript" src="deck.js"></script>
+	<script type="text/javascript" src="dealer.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		dealer.setDeck( deck );
+
+		game.setPlayer(1, 'Fulano');
+		game.setPlayer(1, 'Cicrano');
+
+		var players = dealer.dealCards( game.getPlayers() );
+
+		game.setPlayers( players );
+
+	</script>
+	<canvas class="game"></canvas>
+</body>
+</html>
