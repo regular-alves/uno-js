@@ -85,8 +85,11 @@ game.revert = function() {
 }
 
 game.next = function() {
-	this.turn++;
+	this.turn += this.direction;
 
-	if( this.players.length <= this.turn )
+	if( this.direction>0 && this.players.length <= this.turn ){
 		this.turn = 0;
+	}else if(this.direction<0 && this.turn<0) {
+		this.turn = this.players.length - 1;
+	}
 }
