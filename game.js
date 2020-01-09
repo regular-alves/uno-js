@@ -3,6 +3,7 @@ var game = {
 	trash: [],
 	color: null,
 	number: null,
+	direction: 1,
 	turn: 0
 };
 
@@ -69,6 +70,10 @@ game.trashing = function( card ) {
 	}
 
 	return false;
+}
+
+game.revert = function() {
+	this.direction = this.direction>0 ? 1 : -1;
 }
 
 game.next = function() {
