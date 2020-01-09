@@ -1,103 +1,106 @@
-var deck = [
-	{ id: 'choose_color_1', color: null, number: null, name: 'choose_color', action: ['change_color'] },
-	{ id: 'choose_color_2', color: null, number: null, name: 'choose_color', action: ['change_color'] },
-	{ id: 'choose_color_3', color: null, number: null, name: 'choose_color', action: ['change_color'] },
-	{ id: 'choose_color_4', color: null, number: null, name: 'choose_color', action: ['change_color'] },
-	
-	{ id: 'four_cards_1', color: null, number: null, name: 'four_cards', action: ['four_cards', 'change_color'] },
-	{ id: 'four_cards_2', color: null, number: null, name: 'four_cards', action: ['four_cards', 'change_color'] },
-	{ id: 'four_cards_3', color: null, number: null, name: 'four_cards', action: ['four_cards', 'change_color'] },
-	{ id: 'four_cards_4', color: null, number: null, name: 'four_cards', action: ['four_cards', 'change_color'] },
+var deck = [];
+let colors = ['red', 'blue', 'green', 'yellow'];
 
-	{ id: 'green-0-0', color: 'green', number: 0, name: 0, action: null },
-	{ id: 'green-1-0', color: 'green', number: 1, name: 1, action: null },
-	{ id: 'green-1-1', color: 'green', number: 1, name: 1, action: null },
-	{ id: 'green-2-0', color: 'green', number: 2, name: 2, action: null },
-	{ id: 'green-2-1', color: 'green', number: 2, name: 2, action: null },
-	{ id: 'green-3-0', color: 'green', number: 3, name: 3, action: null },
-	{ id: 'green-3-1', color: 'green', number: 3, name: 3, action: null },
-	{ id: 'green-4-0', color: 'green', number: 4, name: 4, action: null },
-	{ id: 'green-4-1', color: 'green', number: 4, name: 4, action: null },
-	{ id: 'green-5-0', color: 'green', number: 5, name: 5, action: null },
-	{ id: 'green-5-1', color: 'green', number: 5, name: 5, action: null },
-	{ id: 'green-6-0', color: 'green', number: 6, name: 6, action: null },
-	{ id: 'green-6-1', color: 'green', number: 6, name: 6, action: null },
-	{ id: 'green-7-0', color: 'green', number: 7, name: 7, action: null },
-	{ id: 'green-7-1', color: 'green', number: 7, name: 7, action: null },
-	{ id: 'green-8-0', color: 'green', number: 8, name: 8, action: null },
-	{ id: 'green-8-1', color: 'green', number: 8, name: 8, action: null },
-	{ id: 'green-9-0', color: 'green', number: 9, name: 9, action: null },
-	{ id: 'green-9-1', color: 'green', number: 9, name: 9, action: null },
-	{ id: 'green-revert', color: 'green', number: null, name: 'revert', action: 'revert' },
-	{ id: 'green-block', color: 'green', number: null, name: 'block', action: 'block' },
-	{ id: 'green-two-cards', color: 'green', number: null, name: 'two_cards', action: 'two_cards' },
+for (var i = 0; i < 4; i++) {
+	let new_card = Object.assign({}, card);
 
-	{ id: 'red-0-0', color: 'red', number: 0, name: 0, action: null },
-	{ id: 'red-1-0', color: 'red', number: 1, name: 1, action: null },
-	{ id: 'red-1-1', color: 'red', number: 1, name: 1, action: null },
-	{ id: 'red-2-0', color: 'red', number: 2, name: 2, action: null },
-	{ id: 'red-2-1', color: 'red', number: 2, name: 2, action: null },
-	{ id: 'red-3-0', color: 'red', number: 3, name: 3, action: null },
-	{ id: 'red-3-1', color: 'red', number: 3, name: 3, action: null },
-	{ id: 'red-4-0', color: 'red', number: 4, name: 4, action: null },
-	{ id: 'red-4-1', color: 'red', number: 4, name: 4, action: null },
-	{ id: 'red-5-0', color: 'red', number: 5, name: 5, action: null },
-	{ id: 'red-5-1', color: 'red', number: 5, name: 5, action: null },
-	{ id: 'red-6-0', color: 'red', number: 6, name: 6, action: null },
-	{ id: 'red-6-1', color: 'red', number: 6, name: 6, action: null },
-	{ id: 'red-7-0', color: 'red', number: 7, name: 7, action: null },
-	{ id: 'red-7-1', color: 'red', number: 7, name: 7, action: null },
-	{ id: 'red-8-0', color: 'red', number: 8, name: 8, action: null },
-	{ id: 'red-8-1', color: 'red', number: 8, name: 8, action: null },
-	{ id: 'red-9-0', color: 'red', number: 9, name: 9, action: null },
-	{ id: 'red-9-1', color: 'red', number: 9, name: 9, action: null },
-	{ id: 'red-revert', color: 'red', number: null, name: 'revert', action: 'revert' },
-	{ id: 'red-block', color: 'red', number: null, name: 'block', action: 'block' },
-	{ id: 'red-two-cards', color: 'red', number: null, name: 'two_cards', action: 'two_cards' },
+	new_card.id = 'choose_color_' + i;
+	new_card.color = null;
+	new_card.number = null;
+	new_card.name = 'choose_color';
 
-	{ id: 'blue-0-0', color: 'blue', number: 0, name: 0, action: null },
-	{ id: 'blue-1-0', color: 'blue', number: 1, name: 1, action: null },
-	{ id: 'blue-1-1', color: 'blue', number: 1, name: 1, action: null },
-	{ id: 'blue-2-0', color: 'blue', number: 2, name: 2, action: null },
-	{ id: 'blue-2-1', color: 'blue', number: 2, name: 2, action: null },
-	{ id: 'blue-3-0', color: 'blue', number: 3, name: 3, action: null },
-	{ id: 'blue-3-1', color: 'blue', number: 3, name: 3, action: null },
-	{ id: 'blue-4-0', color: 'blue', number: 4, name: 4, action: null },
-	{ id: 'blue-4-1', color: 'blue', number: 4, name: 4, action: null },
-	{ id: 'blue-5-0', color: 'blue', number: 5, name: 5, action: null },
-	{ id: 'blue-5-1', color: 'blue', number: 5, name: 5, action: null },
-	{ id: 'blue-6-0', color: 'blue', number: 6, name: 6, action: null },
-	{ id: 'blue-6-1', color: 'blue', number: 6, name: 6, action: null },
-	{ id: 'blue-7-0', color: 'blue', number: 7, name: 7, action: null },
-	{ id: 'blue-7-1', color: 'blue', number: 7, name: 7, action: null },
-	{ id: 'blue-8-0', color: 'blue', number: 8, name: 8, action: null },
-	{ id: 'blue-8-1', color: 'blue', number: 8, name: 8, action: null },
-	{ id: 'blue-9-0', color: 'blue', number: 9, name: 9, action: null },
-	{ id: 'blue-9-1', color: 'blue', number: 9, name: 9, action: null },
-	{ id: 'blue-revert', color: 'blue', number: null, name: 'revert', action: 'revert' },
-	{ id: 'blue-block', color: 'blue', number: null, name: 'block', action: 'block' },
-	{ id: 'blue-two-cards', color: 'blue', number: null, name: 'two_cards', action: 'two_cards' },
+	new_card.action = function(dealer, game) {
+		game.color = prompt('Escolha uma cor');
+	}
 
-	{ id: 'yellow-0-0', color: 'yellow', number: 0, name: 0, action: null },
-	{ id: 'yellow-1-0', color: 'yellow', number: 1, name: 1, action: null },
-	{ id: 'yellow-1-1', color: 'yellow', number: 1, name: 1, action: null },
-	{ id: 'yellow-2-0', color: 'yellow', number: 2, name: 2, action: null },
-	{ id: 'yellow-2-1', color: 'yellow', number: 2, name: 2, action: null },
-	{ id: 'yellow-3-0', color: 'yellow', number: 3, name: 3, action: null },
-	{ id: 'yellow-3-1', color: 'yellow', number: 3, name: 3, action: null },
-	{ id: 'yellow-4-0', color: 'yellow', number: 4, name: 4, action: null },
-	{ id: 'yellow-4-1', color: 'yellow', number: 4, name: 4, action: null },
-	{ id: 'yellow-5-0', color: 'yellow', number: 5, name: 5, action: null },
-	{ id: 'yellow-5-1', color: 'yellow', number: 5, name: 5, action: null },
-	{ id: 'yellow-6-0', color: 'yellow', number: 6, name: 6, action: null },
-	{ id: 'yellow-6-1', color: 'yellow', number: 6, name: 6, action: null },
-	{ id: 'yellow-7-0', color: 'yellow', number: 7, name: 7, action: null },
-	{ id: 'yellow-7-1', color: 'yellow', number: 7, name: 7, action: null },
-	{ id: 'yellow-8-0', color: 'yellow', number: 8, name: 8, action: null },
-	{ id: 'yellow-8-1', color: 'yellow', number: 8, name: 8, action: null },
-	{ id: 'yellow-9-0', color: 'yellow', number: 9, name: 9, action: null },
-	{ id: 'yellow-9-1', color: 'yellow', number: 9, name: 9, action: null },
-	{ id: 'yellow-revert', color: 'yellow', number: null, name: 'revert', action: 'revert' },
-	{ id: 'yellow-block', color: 'yellow', number: null, name: 'block', action: 'block' },
-	{ id: 'yellow-two-cards', color: 'yellow', number: null, name: 'two_cards', action: 'two_cards' },
-];
+	deck.push(new_card);
+}
+
+for (var i = 0; i < 4; i++) {
+	let new_card = Object.assign({}, card);
+
+	new_card.id = 'four_cards_' + i;
+	new_card.color = null;
+	new_card.number = null;
+	new_card.name = 'four_cards';
+
+	new_card.action = function(dealer, game) {
+		let players = game.getPlayers();
+		
+		game.next();
+
+		for (var i = 0; i < 4; i++) {
+			players[game.turn].cards.push(dealer.getCard());
+		}
+
+		game.color = prompt('Escolha uma cor');
+	}
+
+	deck.push(new_card);
+}
+
+
+for (var key = 0; key < colors.length; key++) {
+	let color = colors[key];
+
+	for (var i = 0; i < 10; i++) {
+		let new_card = Object.assign({}, card);
+
+		new_card.id = color + '-' + i + '-0';
+		new_card.color = color;
+		new_card.number = i;
+		new_card.name = color + '-' + i;
+
+		deck.push(new_card);
+
+		new_card = Object.assign({}, card);
+
+		new_card.id = color + '-' + i + '-1';
+		new_card.color = color;
+		new_card.number = i;
+		new_card.name = color + '-' + i;
+
+		deck.push(new_card);
+	}
+
+	let new_card = Object.assign({}, card);
+
+	new_card.id = color + '-revert';
+	new_card.color = color;
+	new_card.number = i;
+	new_card.name = 'revert-' + color;
+	new_card.action = function(dealer, game) {
+		game.revert();
+	}
+
+	deck.push(new_card);
+
+	new_card = Object.assign({}, card);
+
+	new_card.id = color + '-block';
+	new_card.color = color;
+	new_card.number = i;
+	new_card.name = 'block-' + color;
+	new_card.action = function(dealer, game) {
+		game.next();
+	}
+
+	deck.push(new_card);
+
+	new_card = Object.assign({}, card);
+
+	new_card.id = color + '-two-cards';
+	new_card.color = color;
+	new_card.number = i;
+	new_card.name = 'two-cards-' + color;
+	new_card.action = function(dealer, game) {
+		let players = game.getPlayers();
+		game.next();
+
+		for (var i = 0; i < 2; i++) {
+			players[game.turn].cards.push(dealer.getCard());
+		}
+	}
+
+	deck.push(new_card);
+}
