@@ -67,7 +67,7 @@ for (var key = 0; key < colors.length; key++) {
 
 	new_card.id = color + '-revert';
 	new_card.color = color;
-	new_card.number = i;
+	new_card.number = null;
 	new_card.name = 'revert-' + color;
 	new_card.action = function(dealer, game) {
 		game.revert();
@@ -79,7 +79,7 @@ for (var key = 0; key < colors.length; key++) {
 
 	new_card.id = color + '-block';
 	new_card.color = color;
-	new_card.number = i;
+	new_card.number = null;
 	new_card.name = 'block-' + color;
 	new_card.action = function(dealer, game) {
 		game.next();
@@ -91,7 +91,7 @@ for (var key = 0; key < colors.length; key++) {
 
 	new_card.id = color + '-two-cards';
 	new_card.color = color;
-	new_card.number = i;
+	new_card.number = null;
 	new_card.name = 'two-cards-' + color;
 	new_card.action = function(dealer, game) {
 		let players = game.getPlayers();
