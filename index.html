@@ -4,6 +4,7 @@
 	<title>Uno</title>
 	<script type="text/javascript" src="deck.js"></script>
 	<script type="text/javascript" src="dealer.js"></script>
+	<script type="text/javascript" src="player.js"></script>
 	<script type="text/javascript" src="game.js"></script>
 </head>
 <body>
@@ -11,11 +12,45 @@
 		dealer.setDeck( deck );
 
 		game.setPlayer(1, 'Fulano');
-		game.setPlayer(1, 'Cicrano');
+		game.setPlayer(2, 'Cicrano');
+		game.setPlayers( dealer.dealCards( game.getPlayers() ) );
 
-		var players = dealer.dealCards( game.getPlayers() );
+		console.log('start.game.players > ', game.getPlayers());
 
-		game.setPlayers( players );
+		document.addEventListener('keyup', function(e) {
+			if(isNaN(e.key))
+				return;
+
+			let players = game.getPlayers();
+			let turn_player = players[game.turn];
+
+			if(!turn_player)
+				return;
+
+			let card = turn_player.play(e.key);
+
+			console.log('document.listerner.keyup.players > ', players);	
+			console.log('document.listerner.keyup.game.turn > ', game.turn);	
+			console.log('Turn player > ', turn_player);
+			console.log('document.listerner.keyup.card > ', card);
+
+			if(!card)
+				return;
+
+			if(game.trashing(card)) {
+				console.log('Card accepted > ', true);
+				game.next();
+			}else{
+				console.log('Card accepted > ', false);
+				turn_player.addCard(card);
+			}
+
+			players[game.turn] = turn_player;
+	
+			game.setPlayers(players);
+			console.log('document.listerner.keyup.after.game > ', game);
+			console.log("\n\n");
+		});
 
 	</script>
 	<canvas class="game"></canvas>
