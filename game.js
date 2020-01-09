@@ -39,6 +39,8 @@ game.trashing = function( card ) {
 		this.color = card.color;
 		this.number = card.number;
 
+		card.action(dealer, this);
+
 		return true;
 	}
 
@@ -47,6 +49,8 @@ game.trashing = function( card ) {
 
 		this.color = card.color;
 		this.number = card.number;
+
+		card.action(dealer, this);
 
 		return true;
 	}
@@ -57,6 +61,8 @@ game.trashing = function( card ) {
 		this.color = card.color;
 		this.number = card.number;
 
+		card.action(dealer, this);
+
 		return true;
 	}
 
@@ -65,6 +71,8 @@ game.trashing = function( card ) {
 
 		this.color = card.color;
 		this.number = card.number;
+
+		card.action(dealer, this);
 
 		return true;		
 	}
