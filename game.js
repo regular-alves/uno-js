@@ -1,20 +1,79 @@
-var game = {};
+var game = {
+	players: [],
+	trash: [],
+	color: null,
+	number: null,
+	turn: 0
+};
 
 game.setPlayer = function(id = '', name = '') {
-	if(!this.players)
-		this.players = [];
+	let new_player = Object.assign({}, player);
 
-	this.players.push({
-		id,
-		name,
-		cards: [],
-	});
+	new_player.id = id;
+	new_player.name = name;
+	new_player.cards = [];
+
+	console.log('game.setPlayer.new_player > ', new_player);
+
+	this.players.push(new_player);
+
+	console.log('game.setPlayer.players > ', this.players.length, '>', this.players);
 }
 
 game.setPlayers = function(players) {
+	console.log('game.setPlayers.players > ', this.players);
 	this.players = players;
 }
 
 game.getPlayers = function() {
 	return this.players;
+}
+
+game.trashing = function( card ) {
+	let last = this.trash[ this.trash.length - 1 ];
+
+	if( !this.number && !this.color ) {
+		this.trash.push(card);
+
+		this.color = card.color;
+		this.number = card.number;
+
+		return true;
+	}
+
+	if( ( this.number && card.number && (this.number == card.number) ) || ( this.color && card.color && (this.color == card.color) ) ) {
+		this.trash.push(card);
+
+		this.color = card.color;
+		this.number = card.number;
+
+		return true;
+	}
+
+	if( card.name=='choose_color' ) {
+		this.trash.push(card);
+
+		this.color = card.color;
+		this.number = card.number;
+
+		return true;
+	}
+
+	if( card.name=='four_cards' ) {
+		this.trash.push(card);
+
+		this.color = card.color;
+		this.number = card.number;
+
+		return true;		
+	}
+
+	return false;
+}
+
+game.next = function() {
+	this.turn++;
+
+	if( this.players.length <= this.turn )
+		this.turn = 0;
 }
