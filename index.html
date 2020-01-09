@@ -29,19 +29,14 @@
 
 			let card = turn_player.play(e.key);
 
-			console.log('document.listerner.keyup.players > ', players);	
-			console.log('document.listerner.keyup.game.turn > ', game.turn);	
-			console.log('Turn player > ', turn_player);
-			console.log('document.listerner.keyup.card > ', card);
-
 			if(!card)
 				return;
 
 			if(game.trashing(card)) {
-				console.log('Card accepted > ', true);
+				console.log(turn_player.name, card, ' > ', true);
 				game.next();
 			}else{
-				console.log('Card accepted > ', false);
+				console.log(turn_player.name, card, ' > ', false);
 				turn_player.addCard(card);
 			}
 
