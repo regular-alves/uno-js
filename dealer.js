@@ -19,6 +19,10 @@ dealer.setDeck = function( deck ) {
 	this.deck = this.shuffleCards(deck);
 }
 
+dealer.getCard = function() {
+	return this.deck.shift();
+}
+
 dealer.dealCards = function( players ) {
 	console.log('Dealer.dealCards.start > ', players);
 
@@ -28,7 +32,7 @@ dealer.dealCards = function( players ) {
 		console.log('Dealer.dealCards.for.current_player > ', current_player);
 
 		while (current_player.cards.length<7) {
-			current_player.addCard(this.deck.shift());
+			current_player.addCard(this.getCard());
 		}
 
 		players[i] = current_player;
