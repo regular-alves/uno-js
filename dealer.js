@@ -1,7 +1,7 @@
 var dealer = {};
 
 dealer.shuffleCards = function( deck ) {
-	var currentIndex = deck.length, temporaryValue, randomIndex;
+	let currentIndex = deck.length, temporaryValue, randomIndex;
 
 	while (0 !== currentIndex) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
@@ -20,17 +20,21 @@ dealer.setDeck = function( deck ) {
 }
 
 dealer.dealCards = function( players ) {
-	console.log(players);
+	console.log('Dealer.dealCards.start > ', players);
 
-	for (var i = players.length - 1; i >= 0; i--) {
-		var player = players[i];
+	for (var i = 0; i < players.length; i++) {
+		let current_player = players[i];
 
-		while (player.cards.length<7) {
-			player.cards.push(this.deck.shift());
+		console.log('Dealer.dealCards.for.current_player > ', current_player);
+
+		while (current_player.cards.length<7) {
+			current_player.addCard(this.deck.shift());
 		}
 
-		players[i] = player;
+		players[i] = current_player;
 	}
+	
+	console.log('Dealer.dealCards.end > ', players);
 
 	return players;
 }
