@@ -81,8 +81,8 @@ game.trashing = function( card ) {
 }
 
 game.revert = function() {
-	this.direction = this.direction>0 ? 1 : -1;
 	console.log('game.revert.direction > ', this.direction);
+	this.direction = this.direction<0 ? 1 : -1;
 	console.log('game.revert.direction > ', this.direction);
 }
 
