@@ -15,8 +15,10 @@
 		game.setPlayer(1, 'Fulano');
 		game.setPlayer(2, 'Cicrano');
 		game.setPlayers( dealer.dealCards( game.getPlayers() ) );
+		
+		// game.trashing(dealer.getCard());
 
-		console.log('start.game.players > ', game.getPlayers());
+		console.log('start.game.players > ', game);
 
 		document.addEventListener('keyup', function(e) {
 			if(isNaN(e.key))
