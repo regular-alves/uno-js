@@ -1,4 +1,4 @@
-import player from "./player.js";
+import createPlayer from "./player.js";
 
 const createGame = function() {
   let game = {
@@ -10,12 +10,8 @@ const createGame = function() {
     turn: 0
   };
 
-  game.setPlayer = function(id = "", name = "") {
-    let new_player = Object.assign({}, player);
-
-    new_player.id = id;
-    new_player.name = name;
-    new_player.cards = [];
+  game.setPlayer = function(id, name) {
+    let new_player = createPlayer(id, name);
 
     console.log("game.setPlayer.new_player > ", new_player);
 
