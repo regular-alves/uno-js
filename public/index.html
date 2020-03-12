@@ -16,6 +16,7 @@
       console.log("start.game.players > ", game);
 
       const socket = io();
+      const keyboardListener = createKeyboardListener(document);
 
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
