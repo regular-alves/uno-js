@@ -1,12 +1,12 @@
-function createPlayer(id, name) {
-  let play = number => {
-    if (!this.cards[number]) return false;
+const createPlayer = (id, name) => {
+  let removeCard = index => {
+    if (!this.cards[index]) return false;
 
-    let card = this.cards[number];
+    let card = this.cards[index];
 
     console.log("player.play.cards.length > ", this.cards.length);
 
-    this.cards.splice(number, 1);
+    this.cards.splice(index, 1);
 
     console.log("player.play.cards.length > ", this.cards.length);
 
@@ -21,9 +21,9 @@ function createPlayer(id, name) {
     id,
     name,
     cards: [],
-    play,
+    removeCard,
     addCard
   };
-}
+};
 
 export default createPlayer;
