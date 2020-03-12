@@ -1,25 +1,29 @@
-var player = {
-  id: "",
-  name: "",
-  cards: []
-};
+function createPlayer(id, name) {
+  let play = number => {
+    if (!this.cards[number]) return false;
 
-player.play = function(number) {
-  if (!this.cards[number]) return false;
+    let card = this.cards[number];
 
-  let card = this.cards[number];
+    console.log("player.play.cards.length > ", this.cards.length);
 
-  console.log("player.play.cards.length > ", this.cards.length);
+    this.cards.splice(number, 1);
 
-  this.cards.splice(number, 1);
+    console.log("player.play.cards.length > ", this.cards.length);
 
-  console.log("player.play.cards.length > ", this.cards.length);
+    return card;
+  };
 
-  return card;
-};
+  let addCard = card => {
+    this.cards.push(card);
+  };
 
-player.addCard = function(card) {
-  this.cards.push(card);
-};
+  return {
+    id,
+    name,
+    cards: [],
+    play,
+    addCard
+  };
+}
 
-export default player;
+export default createPlayer;
