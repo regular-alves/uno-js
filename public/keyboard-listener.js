@@ -7,7 +7,7 @@ export default function createKeyboardListener() {
 
     if (!turn_player) return;
 
-    let card = turn_player.play(e.key);
+    let card = turn_player.removeCard(e.key);
 
     if (!card) return;
 
