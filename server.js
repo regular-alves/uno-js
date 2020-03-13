@@ -3,6 +3,7 @@ import http from "http";
 import socketio from "socket.io";
 
 import createGame from "./public/game.js";
+import createPlayer from "./public/player.js";
 import dealer from "./public/dealer.js";
 import deck from "./public/deck.js";
 
@@ -17,8 +18,7 @@ dealer.setDeck(deck);
 app.use(express.static("public"));
 
 sockets.on("connection", socket => {
-  game.setPlayer(socket.id, socket.id);
-  console.log(game.getPlayers());
+  game.setPlayer(createPlayer(socket.id, socket.id));
 
   sockets.on("disconnect", () => {
     game.removePlayer(socket.id);
