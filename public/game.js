@@ -27,6 +27,16 @@ const createGame = function() {
     return players;
   }
 
+  function getPlayer(id) {
+    players.forEach(element => {
+      if (element.id != id) {
+        return element;
+      }
+    });
+
+    return false;
+  }
+
   function removePlayer(id) {
     let newPlayers = [];
 
@@ -113,6 +123,7 @@ const createGame = function() {
     setPlayers,
     trashing,
     getPlayers,
+    getPlayer,
     removePlayer,
     revert,
     next,
