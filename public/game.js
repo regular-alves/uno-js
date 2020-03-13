@@ -1,59 +1,52 @@
 import createPlayer from "./player.js";
 
 const createGame = function() {
-  let game = {
-    players: [],
-    trash: [],
-    color: null,
-    number: null,
-    direction: 1,
-    turn: 0
-  };
+  let players = [];
+  let trash = [];
+  let number = null;
+  let color = null;
+  let direction = 1;
+  let turn = 0;
 
-  game.setPlayer = function(id, name) {
+  function setPlayer(id, name) {
     let new_player = createPlayer(id, name);
 
     console.log("game.setPlayer.new_player > ", new_player);
 
-    this.players.push(new_player);
+    players.push(new_player);
 
-    console.log(
-      "game.setPlayer.players > ",
-      this.players.length,
-      ">",
-      this.players
-    );
-  };
+    console.log("game.setPlayer.players > ", players.length, ">", players);
+  }
 
-  game.setPlayers = function(players) {
-    console.log("game.setPlayers.players > ", this.players);
-    this.players = players;
-  };
+  function setPlayers(list) {
+    console.log("game.setPlayers.players > ", list);
+    players = list;
+  }
 
-  game.getPlayers = function() {
-    return this.players;
-  };
+  function getPlayers() {
+    return players;
+  }
 
-  game.removePlayer = id => {
+  function removePlayer(id) {
     let newPlayers = [];
 
-    this.players.forEach(element => {
+    players.forEach(element => {
       if (element.id != id) {
         newPlayers.push(element);
       }
     });
 
-    this.players = newPlayers;
-  };
+    players = newPlayers;
+  }
 
-  game.trashing = function(card) {
-    let last = this.trash[this.trash.length - 1];
+  function trashing(card) {
+    let last = trash[trash.length - 1];
 
-    if (!this.number && !this.color) {
-      this.trash.push(card);
+    if (!number && !color) {
+      trash.push(card);
 
-      this.color = card.color;
-      this.number = card.number;
+      color = card.color;
+      number = card.number;
 
       card.action(dealer, this);
 
@@ -61,13 +54,13 @@ const createGame = function() {
     }
 
     if (
-      (this.number && card.number && this.number == card.number) ||
-      (this.color && card.color && this.color == card.color)
+      (number && card.number && number == card.number) ||
+      (color && card.color && color == card.color)
     ) {
-      this.trash.push(card);
+      trash.push(card);
 
-      this.color = card.color;
-      this.number = card.number;
+      color = card.color;
+      number = card.number;
 
       card.action(dealer, this);
 
@@ -75,10 +68,10 @@ const createGame = function() {
     }
 
     if (card.name == "choose_color") {
-      this.trash.push(card);
+      trash.push(card);
 
-      this.color = card.color;
-      this.number = card.number;
+      color = card.color;
+      number = card.number;
 
       card.action(dealer, this);
 
@@ -86,10 +79,10 @@ const createGame = function() {
     }
 
     if (card.name == "four_cards") {
-      this.trash.push(card);
+      trash.push(card);
 
-      this.color = card.color;
-      this.number = card.number;
+      color = card.color;
+      number = card.number;
 
       card.action(dealer, this);
 
@@ -97,25 +90,39 @@ const createGame = function() {
     }
 
     return false;
-  };
+  }
 
-  game.revert = function() {
-    console.log("game.revert.direction > ", this.direction);
-    this.direction = this.direction < 0 ? 1 : -1;
-    console.log("game.revert.direction > ", this.direction);
-  };
+  function revert() {
+    console.log("game.revert.direction > ", direction);
+    direction = direction < 0 ? 1 : -1;
+    console.log("game.revert.direction > ", direction);
+  }
 
-  game.next = function() {
-    this.turn += this.direction;
+  function next() {
+    turn += direction;
 
-    if (this.direction > 0 && this.players.length <= this.turn) {
-      this.turn = 0;
-    } else if (this.direction < 0 && this.turn < 0) {
-      this.turn = this.players.length - 1;
+    if (direction > 0 && players.length <= turn) {
+      turn = 0;
+    } else if (direction < 0 && turn < 0) {
+      turn = players.length - 1;
     }
-  };
+  }
 
-  return game;
+  return {
+    setPlayer,
+    setPlayers,
+    trashing,
+    getPlayers,
+    removePlayer,
+    revert,
+    next,
+    players,
+    trash,
+    color,
+    number,
+    direction,
+    turn
+  };
 };
 
 export default createGame;
