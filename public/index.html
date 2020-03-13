@@ -24,6 +24,9 @@
 
       socket.on("setup", game => {
         console.log(game);
+
+        keyboardListener.setPlayer(socket.id);
+        keyboardListener.subscribe(game.trashing);
       });
     </script>
     <canvas class="game"></canvas>
