@@ -21,8 +21,7 @@ const createGame = function() {
   }
 
   function setPlayers(list) {
-    console.log("game.setPlayers.players > ", list);
-    players = list;
+    list.forEach(element => setPlayer(element));
   }
 
   function getPlayers() {
