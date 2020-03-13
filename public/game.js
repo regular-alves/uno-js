@@ -8,14 +8,16 @@ const createGame = function() {
   let direction = 1;
   let turn = 0;
 
-  function setPlayer(id, name) {
-    let new_player = createPlayer(id, name);
+  function setPlayer(player) {
+    players.forEach(element, key => {
+      if (element.id == player.id) {
+        player[key] = player;
 
-    console.log("game.setPlayer.new_player > ", new_player);
+        return players;
+      }
+    });
 
-    players.push(new_player);
-
-    console.log("game.setPlayer.players > ", players.length, ">", players);
+    return players.push(player);
   }
 
   function setPlayers(list) {
