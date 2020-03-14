@@ -9,7 +9,7 @@ const createGame = function() {
   let turn = 0;
 
   function setPlayer(player) {
-    players.forEach(element, key => {
+    players.forEach((element, key) => {
       if (element.id == player.id) {
         player[key] = player;
 
