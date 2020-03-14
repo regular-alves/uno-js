@@ -1,5 +1,5 @@
 export default function createKeyboardListener(document) {
-  const state = {
+  let state = {
     player: null,
     observers: []
   };
