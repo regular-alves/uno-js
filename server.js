@@ -26,9 +26,12 @@ sockets.on("connection", socket => {
 
   if (game.getPlayers().length > 1) {
     game.setPlayers(dealer.dealCards(game.getPlayers()));
-    console.log(game);
-
-    sockets.emit("setup", game);
+    sockets.emit("setup", {
+      number: game.number,
+      color: game.color,
+      direction: game.direction,
+      turn: game.turn
+    });
   }
 });
 
