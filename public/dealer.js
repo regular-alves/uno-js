@@ -1,38 +1,45 @@
-var dealer = {};
+export default function createDealer() {
+  let deck = [];
 
-dealer.shuffleCards = function(deck) {
-  let currentIndex = deck.length,
-    temporaryValue,
-    randomIndex;
+  function shuffleCards(deck) {
+    let currentIndex = deck.length,
+      temporaryValue,
+      randomIndex;
 
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
 
-    temporaryValue = deck[currentIndex];
-    deck[currentIndex] = deck[randomIndex];
-    deck[randomIndex] = temporaryValue;
-  }
-
-  return deck;
-};
-
-dealer.setDeck = function(deck) {
-  this.deck = this.shuffleCards(deck);
-};
-
-dealer.getCard = function() {
-  return this.deck.shift();
-};
-
-dealer.dealCards = function(players) {
-  for (var i = 0; i < players.length; i++) {
-    while (players[i].cards.length < 7) {
-      players[i].addCard(this.getCard());
+      temporaryValue = deck[currentIndex];
+      deck[currentIndex] = deck[randomIndex];
+      deck[randomIndex] = temporaryValue;
     }
+
+    return deck;
   }
 
-  return players;
-};
+  function setDeck(deck) {
+    deck = shuffleCards(deck);
+  }
 
-export default dealer;
+  function getCard(qty = 1) {
+    return deck.shift();
+  }
+
+  function dealCards(players) {
+    for (var i = 0; i < players.length; i++) {
+      while (players[i].cards.length < 7) {
+        players[i].addCard(getCard());
+      }
+    }
+
+    return players;
+  }
+
+  return {
+    getCard,
+    shuffleCards,
+    setDeck,
+    dealCards
+  };
+}
