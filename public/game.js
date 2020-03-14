@@ -50,7 +50,9 @@ const createGame = function() {
     players = newPlayers;
   }
 
-  function trashing(card) {
+  function trashing(play) {
+    let player = getPlayer(play.player);
+    console.log(player);
     let last = trash[trash.length - 1];
 
     if (!number && !color) {
