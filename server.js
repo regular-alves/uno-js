@@ -4,13 +4,14 @@ import socketio from "socket.io";
 
 import createGame from "./public/game.js";
 import createPlayer from "./public/player.js";
-import dealer from "./public/dealer.js";
+import createDealer from "./public/dealer.js";
 import deck from "./public/deck.js";
 
 const app = express();
 const server = http.createServer(app);
 const sockets = socketio(server);
 
+const dealer = createDealer();
 const game = createGame();
 
 dealer.setDeck(deck);
