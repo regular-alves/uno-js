@@ -11,22 +11,23 @@
       import deck from "./deck.js";
       import dealer from "./dealer.js";
       import player from "./player.js";
-      import game from "./game.js";
-
-      console.log("start.game.players > ", game);
+      import createGame from "./game.js";
 
       const socket = io();
+      const game = createGame();
       const keyboardListener = createKeyboardListener(document);
 
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
       });
 
-      socket.on("setup", game => {
-        console.log(game);
+      socket.on("setup", state => {
+        console.log(game.trashing);
 
         keyboardListener.setPlayer(socket.id);
-        keyboardListener.subscribe(game.trashing);
+        keyboardListener.subscribe(command => {
+          socket.emit("player-movement", command);
+        });
       });
     </script>
     <canvas class="game"></canvas>
