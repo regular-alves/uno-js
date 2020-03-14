@@ -1,4 +1,6 @@
 const createPlayer = (id, name) => {
+  let cards = [];
+
   let removeCard = index => {
     if (!this.cards[index]) return false;
 
@@ -14,13 +16,13 @@ const createPlayer = (id, name) => {
   };
 
   let addCard = card => {
-    this.cards.push(card);
+    cards.push(card);
   };
 
   return {
     id,
     name,
-    cards: [],
+    cards,
     removeCard,
     addCard
   };
