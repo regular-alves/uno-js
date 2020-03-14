@@ -20,14 +20,14 @@
 
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
-      });
 
-      socket.on("setup", state => {
+        socket.on("setup", state => {
         console.log(game.trashing);
 
-        keyboardListener.setPlayer(socket.id);
-        keyboardListener.subscribe(command => {
-          socket.emit("player-movement", command);
+          keyboardListener.setPlayer(socket.id);
+          keyboardListener.subscribe(command => {
+            socket.emit("player-movement", command);
+          });
         });
       });
     </script>
