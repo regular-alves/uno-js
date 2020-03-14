@@ -26,21 +26,11 @@ dealer.getCard = function() {
 };
 
 dealer.dealCards = function(players) {
-  console.log("Dealer.dealCards.start > ", players);
-
   for (var i = 0; i < players.length; i++) {
-    let current_player = players[i];
-
-    console.log("Dealer.dealCards.for.current_player > ", current_player);
-
-    while (current_player.cards.length < 7) {
-      current_player.addCard(this.getCard());
+    while (players[i].cards.length < 7) {
+      players[i].addCard(this.getCard());
     }
-
-    players[i] = current_player;
   }
-
-  console.log("Dealer.dealCards.end > ", players);
 
   return players;
 };
