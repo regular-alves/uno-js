@@ -25,13 +25,19 @@ sockets.on("connection", socket => {
     game.removePlayer(socket.id);
   });
 
+  sockets.on("player-movement", command => {
+    console.log(command);
+  });
+
   if (game.getPlayers().length > 1) {
     game.setPlayers(dealer.dealCards(game.getPlayers()));
     sockets.emit("setup", {
       number: game.number,
       color: game.color,
       direction: game.direction,
-      turn: game.turn
+      turn: game.turn,
+      trash: game.trash,
+      cards: game.getPlayer(socket.id)
     });
   }
 });
