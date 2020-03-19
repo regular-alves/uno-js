@@ -1,0 +1,59 @@
+body,
+* {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#game {
+  padding: 15px;
+}
+
+#cards > .card {
+  display: inline-block;
+  width: 90px;
+  height: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 15px 0 0;
+  vertical-align: top;
+  border-radius: 5px;
+  background: linear-gradient(25deg, rgb(226, 226, 226), rgb(255, 255, 255));
+  position: relative;
+}
+
+#cards > .card.color-blue {
+  color: #0056ff;
+}
+
+#cards > .card.color-yellow {
+  color: #b5bb08;
+}
+
+#cards > .card.color-red {
+  color: #da0000;
+}
+
+#cards > .card.color-green {
+  color: #2b963a;
+}
+
+.card .card-number {
+  position: absolute;
+  font-weight: 600;
+}
+
+.card .card-number:first-child {
+  top: 5px;
+  left: 5px;
+}
+
+.card .card-number:last-child {
+  bottom: 5px;
+  right: 5px;
+  transform: rotate(180deg);
+}

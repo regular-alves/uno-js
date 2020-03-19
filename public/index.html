@@ -3,6 +3,7 @@
   <head>
     <title>Uno</title>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <script type="module">
@@ -10,24 +11,29 @@
       import card from "./card.js";
       import deck from "./deck.js";
       import player from "./player.js";
-      import createGame from "./game.js";
+      import createClientGame from "./client-game.js";
 
       const socket = io();
-      const dealer = createDealer();
-      const game = createGame();
+      var game = createClientGame({}, document);
+      var clickListener = createClickListener(document);
       const keyboardListener = createKeyboardListener(document);
 
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
 
-        socket.on("setup", state => {
-          keyboardListener.setPlayer(socket.id);
-          keyboardListener.subscribe(command => {
+        socket.on("update-" + socket.id, state => {
+          game = createClientGame(state, document);
+
+          game.render();
             socket.emit("player-movement", command);
           });
         });
       });
     </script>
-    <canvas class="game"></canvas>
+    <div id="game">
+      <div id="direction"></div>
+      <ul id="trash"></ul>
+      <ul id="cards"></ul>
+    </div>
   </body>
 </html>
