@@ -29,13 +29,18 @@ sockets.on("connection", socket => {
 
   if (game.getPlayers().length > 1) {
     game.setPlayers(dealer.dealCards(game.getPlayers()));
-    sockets.emit("setup", {
-      number: game.number,
-      color: game.color,
-      direction: game.direction,
-      turn: game.turn,
-      trash: game.trash,
-      cards: game.getPlayer(socket.id)
+
+    game.getPlayers().forEach(player => {
+      console.log("update-" + socket.id);
+
+      sockets.emit("update-" + socket.id, {
+        number: game.number,
+        color: game.color,
+        direction: game.direction,
+        turn: game.turn,
+        trash: game.trash,
+        cards: player.cards
+      });
     });
   }
 });
