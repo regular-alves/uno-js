@@ -1,4 +1,4 @@
-export default function createKeyboardListener(document) {
+export default function createClickListener(document) {
   let state = {
     player: null,
     observers: []
@@ -18,21 +18,20 @@ export default function createKeyboardListener(document) {
     });
   }
 
-  document.addEventListener("keyup", keyPressHandle);
+  const cards = document.getElementsByClassName("card");
+
+  console.log(cards.length);
+
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener("click", keyPressHandle);
+  }
 
   function keyPressHandle(e) {
-    if (isNaN(e.key)) return;
-
-    let players = game.getPlayers();
-    let turn_player = players[game.turn];
-
-    if (!turn_player) return;
-
-    let card = turn_player.removeCard(e.key);
-
-    if (!card) return;
-
-    trigger({ player: state.player, card });
+    trigger({
+      player: state.player,
+      card: e.target.getAttribute("data-card-index")
+    });
+    return;
 
     if (game.trashing(card)) {
       console.log(turn_player.name, card, " > ", true);
