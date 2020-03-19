@@ -11,10 +11,8 @@ const app = express();
 const server = http.createServer(app);
 const sockets = socketio(server);
 
-const dealer = createDealer();
+const dealer = createDealer(deck);
 const game = createGame();
-
-dealer.setDeck(deck);
 
 app.use(express.static("public"));
 
