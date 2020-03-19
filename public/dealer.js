@@ -1,5 +1,5 @@
-export default function createDealer() {
-  let deck = [];
+export default function createDealer(deck) {
+  deck = shuffleCards(deck);
 
   function shuffleCards(deck) {
     let currentIndex = deck.length,
@@ -18,11 +18,8 @@ export default function createDealer() {
     return deck;
   }
 
-  function setDeck(deck) {
-    deck = shuffleCards(deck);
-  }
-
   function getCard(qty = 1) {
+    console.log(deck);
     return deck.shift();
   }
 
@@ -39,7 +36,6 @@ export default function createDealer() {
   return {
     getCard,
     shuffleCards,
-    setDeck,
     dealCards
   };
 }
