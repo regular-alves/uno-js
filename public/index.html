@@ -7,7 +7,7 @@
   </head>
   <body>
     <script type="module">
-      import createKeyboardListener from "./keyboard-listener.js";
+      import createClickListener from "./click-listener.js";
       import card from "./card.js";
       import deck from "./deck.js";
       import player from "./player.js";
@@ -16,7 +16,8 @@
       const socket = io();
       var game = createClientGame({}, document);
       var clickListener = createClickListener(document);
-      const keyboardListener = createKeyboardListener(document);
+
+      console.log("start.game.players > ", game);
 
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
@@ -25,6 +26,11 @@
           game = createClientGame(state, document);
 
           game.render();
+          clickListener = createClickListener(document);
+
+          clickListener.setPlayer(socket.id);
+          clickListener.subscribe(command => {
+            console.log(socket, command);
             socket.emit("player-movement", command);
           });
         });
