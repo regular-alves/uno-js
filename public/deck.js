@@ -1,109 +1,86 @@
-import card from "./card.js";
+import createCard from "./card.js";
 
 var deck = [];
 let colors = ["red", "blue", "green", "yellow"];
 
 for (var i = 0; i < 4; i++) {
-  let new_card = Object.assign({}, card);
-
-  new_card.id = "choose_color_" + i;
-  new_card.color = null;
-  new_card.number = null;
-  new_card.name = "choose_color";
-
-  new_card.action = function(dealer, game) {
-    game.color = prompt("Escolha uma cor");
-  };
-
-  deck.push(new_card);
+  deck.push(
+    createCard(
+      "choose_color_" + i,
+      null,
+      null,
+      "choose_color",
+      (dealer, game) => {
+        game.color = prompt("Escolha uma cor");
+      }
+    )
+  );
 }
 
 for (var i = 0; i < 4; i++) {
-  let new_card = Object.assign({}, card);
+  deck.push(
+    createCard("four_cards_" + i, null, null, "four_cards", (dealer, game) => {
+      let players = game.getPlayers();
 
-  new_card.id = "four_cards_" + i;
-  new_card.color = null;
-  new_card.number = null;
-  new_card.name = "four_cards";
+      game.next();
 
-  new_card.action = function(dealer, game) {
-    let players = game.getPlayers();
+      for (var i = 0; i < 4; i++) {
+        players[game.turn].cards.push(dealer.getCard());
+      }
 
-    game.next();
-
-    for (var i = 0; i < 4; i++) {
-      players[game.turn].cards.push(dealer.getCard());
-    }
-
-    game.color = prompt("Escolha uma cor");
-  };
-
-  deck.push(new_card);
+      game.color = prompt("Escolha uma cor");
+    })
+  );
 }
 
 for (var key = 0; key < colors.length; key++) {
   let color = colors[key];
 
   for (var i = 0; i < 10; i++) {
-    let new_card = Object.assign({}, card);
-
-    new_card.id = color + "-" + i + "-0";
-    new_card.color = color;
-    new_card.number = i;
-    new_card.name = color + "-" + i;
-
-    deck.push(new_card);
-
-    new_card = Object.assign({}, card);
-
-    new_card.id = color + "-" + i + "-1";
-    new_card.color = color;
-    new_card.number = i;
-    new_card.name = color + "-" + i;
-
-    deck.push(new_card);
+    deck.push(createCard(color + "-" + i + "-0", color, i, color + "-" + i));
+    deck.push(createCard(color + "-" + i + "-1", color, i, color + "-" + i));
   }
 
-  let new_card = Object.assign({}, card);
+  deck.push(
+    createCard(
+      color + "-revert",
+      color,
+      null,
+      "revert-" + color,
+      (dealer, game) => {
+        game.revert();
+      }
+    )
+  );
 
-  new_card.id = color + "-revert";
-  new_card.color = color;
-  new_card.number = null;
-  new_card.name = "revert-" + color;
-  new_card.action = function(dealer, game) {
-    game.revert();
-  };
+  deck.push(
+    createCard(
+      color + "-block",
+      color,
+      null,
+      "block-" + color,
+      (dealer, game) => {
+        game.next();
+      }
+    )
+  );
 
-  deck.push(new_card);
+  deck.push(
+    createCard(
+      color + "-two-cards",
+      color,
+      null,
+      "two-cards-" + color,
+      (dealer, game) => {
+        let players = game.getPlayers();
+        game.next();
 
-  new_card = Object.assign({}, card);
-
-  new_card.id = color + "-block";
-  new_card.color = color;
-  new_card.number = null;
-  new_card.name = "block-" + color;
-  new_card.action = function(dealer, game) {
-    game.next();
-  };
-
-  deck.push(new_card);
-
-  new_card = Object.assign({}, card);
-
-  new_card.id = color + "-two-cards";
-  new_card.color = color;
-  new_card.number = null;
-  new_card.name = "two-cards-" + color;
-  new_card.action = function(dealer, game) {
-    let players = game.getPlayers();
-    game.next();
-
-    for (var i = 0; i < 2; i++) {
-      players[game.turn].cards.push(dealer.getCard());
-    }
-  };
-
-  deck.push(new_card);
+        for (var i = 0; i < 2; i++) {
+          players[game.turn].cards.push(dealer.getCard());
+        }
+      }
+    )
+  );
 }
 
 export default deck;
