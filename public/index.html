@@ -3,27 +3,40 @@
   <head>
     <title>Uno</title>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script
+      type="text/javascript"
+      src="https://kit.fontawesome.com/97eee023a1.js"
+    ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <script type="module">
       import createClickListener from "./click-listener.js";
-      import player from "./player.js";
+      import createCard from "./card.js";
       import createClientGame from "./client-game.js";
 
       const socket = io();
       var game = createClientGame({}, document);
       var clickListener = createClickListener(document);
 
-      console.log("start.game.players > ", game);
-
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
 
         socket.on("update-" + socket.id, state => {
+          state.cards = state.cards.map(item => {
+            return createCard(
+              item.id,
+              item.color,
+              item.number,
+              item.name,
+              item.action
+            );
+          });
+
           game = createClientGame(state, document);
 
           game.render();
+
           clickListener = createClickListener(document);
 
           clickListener.setPlayer(socket.id);
