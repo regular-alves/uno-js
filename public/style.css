@@ -57,3 +57,65 @@ body {
   right: 5px;
   transform: rotate(180deg);
 }
+
+.card:before {
+  left: 33%;
+  top: 33%;
+  left: calc(50% - 15px);
+  top: calc(50% - 15px);
+  transform: rotate3d(-1, 1, 1, 45deg);
+  text-align: center;
+  display: block;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+}
+
+.card.choose_color:before {
+  content: " ";
+  border: 12px solid;
+  border-top-color: #0056ff;
+  border-left-color: #b5bb08;
+  border-bottom-color: #da0000;
+  border-right-color: #2b963a;
+  width: 0px;
+  height: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.2);
+  transform: rotate3d(-1, 1, 1, 45deg) rotate(15deg);
+}
+
+.card.revert-red:before,
+.card.revert-blue:before,
+.card.revert-yellow:before,
+.card.revert-green:before {
+  content: "\f021";
+  font-family: "FontAwesome";
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.card.block-red:before,
+.card.block-blue:before,
+.card.block-yellow:before,
+.card.block-green:before {
+  content: "\f05e";
+  font-family: "FontAwesome";
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.card.four_cards:before {
+  content: "+4";
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.card.two-cards-green:before,
+.card.two-cards-blue:before,
+.card.two-cards-red:before,
+.card.two-cards-yellow:before {
+  content: "+2";
+  font-weight: 600;
+  font-size: 25px;
+}
