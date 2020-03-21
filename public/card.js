@@ -4,25 +4,25 @@ export default function createCard(id, color, number, name, action = null) {
 
     html.push(
       '<li class="card color-' +
-        card.color +
+        color +
+        " " +
+        name +
         '" data-card-name="' +
-        card.color +
+        color +
         '" data-card-number="' +
-        card.number +
+        number +
         '" data-card-index="' +
         index +
         '" alt="' +
-        card.name +
+        name +
         '">'
     );
 
-    if (card.number) {
-      html.push("<span class='card-number'>" + card.number + "</span>");
-    }
+    if (number != null)
+      html.push("<span class='card-number'>" + number + "</span>");
 
-    if (card.number) {
-      html.push("<span class='card-number'>" + card.number + "</span>");
-    }
+    if (number != null)
+      html.push("<span class='card-number'>" + number + "</span>");
 
     html.push("</li>");
 
