@@ -19,6 +19,8 @@
       var game = createClientGame({}, document);
       var clickListener = createClickListener(document);
 
+      console.log("start.game.players > ", game);
+
       socket.on("connect", () => {
         console.log("My ID is " + socket.id);
 
