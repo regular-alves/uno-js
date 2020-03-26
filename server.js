@@ -19,30 +19,27 @@ app.use(express.static("public"));
 sockets.on("connection", socket => {
   game.setPlayer(createPlayer(socket.id, socket.id));
 
-  sockets.on("disconnect", () => {
+  if (game.getPlayers().length > 1) {
+    game.setPlayers(dealer.dealCards(game.getPlayers()));
+    game.change(socket);
+  }
+
+  socket.on("disconnect", () => {
     game.removePlayer(socket.id);
   });
 
-  sockets.on("player-movement", command => {
+  socket.on("player-movement", command => {
+    let player = game.getPlayer(command.player);
+
+    if (!player) return;
+
+    let card = player.removeCard(command.card);
+
     console.log(command);
+    console.log(card);
+
+    game.change(socket);
   });
-
-  if (game.getPlayers().length > 1) {
-    game.setPlayers(dealer.dealCards(game.getPlayers()));
-
-    game.getPlayers().forEach(player => {
-      console.log("update-" + socket.id);
-
-      sockets.emit("update-" + socket.id, {
-        number: game.number,
-        color: game.color,
-        direction: game.direction,
-        turn: game.turn,
-        trash: game.trash,
-        cards: player.cards
-      });
-    });
-  }
 });
 
 server.listen(3000, () => {
