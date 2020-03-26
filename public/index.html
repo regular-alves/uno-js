@@ -22,8 +22,6 @@
       console.log("start.game.players > ", game);
 
       socket.on("connect", () => {
-        console.log("My ID is " + socket.id);
-
         socket.on("update-" + socket.id, state => {
           state.cards = state.cards.map(item => {
             return createCard(
@@ -43,7 +41,6 @@
 
           clickListener.setPlayer(socket.id);
           clickListener.subscribe(command => {
-            console.log(socket, command);
             socket.emit("player-movement", command);
           });
         });

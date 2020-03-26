@@ -19,7 +19,6 @@ export default function createDealer(deck) {
   }
 
   function getCard(qty = 1) {
-    console.log(deck);
     return deck.shift();
   }
 
