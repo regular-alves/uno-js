@@ -2,15 +2,15 @@ const createPlayer = (id, name) => {
   let cards = [];
 
   let removeCard = index => {
-    if (!this.cards[index]) return false;
+    if (!cards[index]) return false;
 
-    let card = this.cards[index];
+    let card = cards[index];
 
-    console.log("player.play.cards.length > ", this.cards.length);
+    console.log("player.play.cards.length > ", cards.length);
 
-    this.cards.splice(index, 1);
+    cards.splice(index, 1);
 
-    console.log("player.play.cards.length > ", this.cards.length);
+    console.log("player.play.cards.length > ", cards.length);
 
     return card;
   };
