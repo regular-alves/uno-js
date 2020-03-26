@@ -29,11 +29,9 @@ const createGame = function() {
   }
 
   function getPlayer(id) {
-    players.forEach(element => {
-      if (element.id != id) {
-        return element;
-      }
-    });
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].id == id) return players[i];
+    }
 
     return false;
   }
