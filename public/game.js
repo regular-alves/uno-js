@@ -36,6 +36,19 @@ const createGame = function() {
     return false;
   }
 
+  function change(sockets) {
+    players.forEach(player => {
+      sockets.emit("update-" + player.id, {
+        number: number,
+        color: color,
+        direction: direction,
+        turn: turn,
+        trash: trash,
+        cards: player.cards
+      });
+    });
+  }
+
   function removePlayer(id) {
     let newPlayers = [];
 
@@ -128,6 +141,7 @@ const createGame = function() {
     removePlayer,
     revert,
     next,
+    change,
     players,
     trash,
     color,
