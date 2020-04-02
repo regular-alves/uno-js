@@ -12,6 +12,8 @@ for (var i = 0; i < 4; i++) {
       "choose_color",
       (dealer, game) => {
         game.color = prompt("Escolha uma cor");
+
+        return [game, dealer.deck];
       }
     )
   );
@@ -29,6 +31,8 @@ for (var i = 0; i < 4; i++) {
       }
 
       game.color = prompt("Escolha uma cor");
+
+      return [game, dealer.deck];
     })
   );
 }
@@ -49,6 +53,8 @@ for (var key = 0; key < colors.length; key++) {
       "revert-" + color,
       (dealer, game) => {
         game.revert();
+
+        return [game, dealer.deck];
       }
     )
   );
@@ -61,6 +67,8 @@ for (var key = 0; key < colors.length; key++) {
       "block-" + color,
       (dealer, game) => {
         game.next();
+
+        return [game, dealer.deck];
       }
     )
   );
@@ -78,6 +86,8 @@ for (var key = 0; key < colors.length; key++) {
         for (var i = 0; i < 2; i++) {
           players[game.turn].cards.push(dealer.getCard());
         }
+
+        return [game, dealer.deck];
       }
     )
   );
