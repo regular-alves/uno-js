@@ -6,11 +6,7 @@ const createPlayer = (id, name) => {
 
     let card = cards[index];
 
-    console.log("player.play.cards.length > ", cards.length);
-
     cards.splice(index, 1);
-
-    console.log("player.play.cards.length > ", cards.length);
 
     return card;
   };
