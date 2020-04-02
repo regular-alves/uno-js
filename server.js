@@ -21,7 +21,7 @@ sockets.on("connection", socket => {
 
   if (game.getPlayers().length > 1) {
     game.setPlayers(dealer.dealCards(game.getPlayers()));
-    game.change(socket);
+    game.change(sockets);
   }
 
   socket.on("disconnect", () => {
@@ -35,7 +35,7 @@ sockets.on("connection", socket => {
 
     let card = player.removeCard(command.card);
 
-    dealer.discart(game, card).change(socket);
+    dealer.discart(game, card).change(sockets);
   });
 });
 
