@@ -1,5 +1,5 @@
-export default function createDealer(deck) {
-  deck = shuffleCards(deck);
+export default function createDealer(cards) {
+  let deck = shuffleCards(cards);
 
   function shuffleCards(deck) {
     let currentIndex = deck.length,
@@ -32,7 +32,53 @@ export default function createDealer(deck) {
     return players;
   }
 
+  function discart(game, card) {
+    if (!game.number && !game.color) {
+      game.trash.push(card);
+
+      game.color = card.color;
+      game.number = card.number;
+
+      [game, deck] = card.action(this, game);
+    }
+
+    if (
+      (game.number && card.number && game.number == card.number) ||
+      (game.color && card.color && game.color == card.color)
+    ) {
+      game.trash.push(card);
+
+      game.color = card.color;
+      game.number = card.number;
+
+      [game, deck] = card.action(this, game);
+    }
+
+    if (card.name == "choose_color") {
+      game.trash.push(card);
+
+      game.color = card.color;
+      game.number = card.number;
+
+      [game, deck] = card.action(this, game);
+    }
+
+    if (card.name == "four_cards") {
+      game.trash.push(card);
+
+      game.color = card.color;
+      game.number = card.number;
+
+      [game, deck] = card.action(this, game);
+    }
+
+    console.log(game.getPlayers());
+
+    return game;
+  }
+
   return {
+    discart,
     getCard,
     shuffleCards,
     dealCards

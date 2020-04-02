@@ -61,61 +61,6 @@ const createGame = function() {
     players = newPlayers;
   }
 
-  function trashing(play) {
-    let player = getPlayer(play.player);
-    console.log(player);
-    let last = trash[trash.length - 1];
-
-    if (!number && !color) {
-      trash.push(card);
-
-      color = card.color;
-      number = card.number;
-
-      card.action(dealer, this);
-
-      return true;
-    }
-
-    if (
-      (number && card.number && number == card.number) ||
-      (color && card.color && color == card.color)
-    ) {
-      trash.push(card);
-
-      color = card.color;
-      number = card.number;
-
-      card.action(dealer, this);
-
-      return true;
-    }
-
-    if (card.name == "choose_color") {
-      trash.push(card);
-
-      color = card.color;
-      number = card.number;
-
-      card.action(dealer, this);
-
-      return true;
-    }
-
-    if (card.name == "four_cards") {
-      trash.push(card);
-
-      color = card.color;
-      number = card.number;
-
-      card.action(dealer, this);
-
-      return true;
-    }
-
-    return false;
-  }
-
   function revert() {
     console.log("game.revert.direction > ", direction);
     direction = direction < 0 ? 1 : -1;
@@ -135,7 +80,6 @@ const createGame = function() {
   return {
     setPlayer,
     setPlayers,
-    trashing,
     getPlayers,
     getPlayer,
     removePlayer,
