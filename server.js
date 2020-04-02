@@ -35,10 +35,7 @@ sockets.on("connection", socket => {
 
     let card = player.removeCard(command.card);
 
-    console.log(command);
-    console.log(card);
-
-    game.change(socket);
+    dealer.discart(game, card).change(socket);
   });
 });
 
