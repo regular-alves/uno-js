@@ -29,6 +29,12 @@ export default function createCard(id, color, number, name, action = null) {
     return html.join("");
   }
 
+  if (action == null) {
+    action = (dealer, game) => {
+      return [game, dealer.deck];
+    };
+  }
+
   return {
     id,
     color,
