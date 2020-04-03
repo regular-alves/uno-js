@@ -29,8 +29,12 @@ const createGame = function() {
   }
 
   function getPlayer(id) {
-    for (let i = 0; i < players.length; i++) {
-      if (players[i].id == id) return players[i];
+    if (isNaN(id)) {
+      for (let i = 0; i < players.length; i++) {
+        if (players[i].id == id) return players[i];
+      }
+    } else {
+      return players[id];
     }
 
     return false;
