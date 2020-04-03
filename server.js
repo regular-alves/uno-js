@@ -30,12 +30,14 @@ sockets.on("connection", socket => {
 
   socket.on("player-movement", command => {
     let player = game.getPlayer(command.player);
+    let turn_player = game.getPlayer(game.turn);
 
-    if (!player) return;
+    if (!player || !turn_player || player.id != turn_player.id)
+      return game.change(sockets);
 
     let card = player.removeCard(command.card);
 
-    dealer.discart(game, card).change(sockets);
+    return dealer.discart(game, card).change(sockets);
   });
 });
 
