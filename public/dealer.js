@@ -25,7 +25,7 @@ export default function createDealer(cards) {
   function dealCards(players) {
     for (var i = 0; i < players.length; i++) {
       while (players[i].cards.length < 7) {
-        players[i].addCard(getCard());
+        players[i].addCard(this.getCard());
       }
     }
 
