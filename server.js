@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const sockets = socketio(server);
 
 const dealer = createDealer(deck);
-const game = createGame();
+var game = createGame();
 
 app.use(express.static("public"));
 
@@ -37,7 +37,8 @@ sockets.on("connection", socket => {
 
     let card = player.removeCard(command.card);
 
-    return dealer.discart(game, card).change(sockets);
+    game = dealer.discart(game, card);
+    return game.change(sockets);
   });
 });
 
