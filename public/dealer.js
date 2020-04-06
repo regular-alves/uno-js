@@ -40,9 +40,9 @@ export default function createDealer(cards) {
       game.number = card.number;
 
       [game, deck] = card.action(this, game);
-    }
 
-    if (
+      game.next();
+    } else if (
       (game.number && card.number && game.number == card.number) ||
       (game.color && card.color && game.color == card.color)
     ) {
@@ -52,27 +52,27 @@ export default function createDealer(cards) {
       game.number = card.number;
 
       [game, deck] = card.action(this, game);
-    }
 
-    if (card.name == "choose_color") {
+      game.next();
+    } else if (card.name == "choose_color") {
       game.trash.push(card);
 
       game.color = card.color;
       game.number = card.number;
 
       [game, deck] = card.action(this, game);
-    }
 
-    if (card.name == "four_cards") {
+      game.next();
+    } else if (card.name == "four_cards") {
       game.trash.push(card);
 
       game.color = card.color;
       game.number = card.number;
 
       [game, deck] = card.action(this, game);
-    }
 
-    console.log(game.getPlayers());
+      game.next();
+    }
 
     return game;
   }
