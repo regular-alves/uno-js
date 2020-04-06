@@ -72,12 +72,12 @@ const createGame = function() {
   }
 
   function next() {
-    turn += direction;
+    this.turn += this.direction;
 
-    if (direction > 0 && players.length <= turn) {
-      turn = 0;
-    } else if (direction < 0 && turn < 0) {
-      turn = players.length - 1;
+    if (this.direction > 0 && this.players.length <= this.turn) {
+      this.turn = 0;
+    } else if (this.direction < 0 && this.turn < 0) {
+      this.turn = this.players.length - 1;
     }
   }
 
