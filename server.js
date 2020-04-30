@@ -36,8 +36,14 @@ sockets.on("connection", socket => {
       return game.change(sockets);
 
     let card = player.removeCard(command.card);
+    const discartResult = dealer.discart(game, card);
 
-    game = dealer.discart(game, card);
+    if (discartResult) {
+      game = discartResult;
+    } else {
+      player.addCard(card);
+    }
+
     return game.change(sockets);
   });
 });

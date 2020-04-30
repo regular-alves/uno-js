@@ -72,6 +72,8 @@ export default function createDealer(cards) {
       [game, deck] = card.action(this, game);
 
       game.next();
+    } else {
+      return false;
     }
 
     return game;
