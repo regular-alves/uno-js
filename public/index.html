@@ -22,8 +22,20 @@
       console.log("start.game.players > ", game);
 
       socket.on("connect", () => {
-        socket.on("update-" + socket.id, state => {
-          state.cards = state.cards.map(item => {
+        socket.on("update-" + socket.id, (state) => {
+          console.log(state);
+
+          state.cards = state.cards.map((item) => {
+            return createCard(
+              item.id,
+              item.color,
+              item.number,
+              item.name,
+              item.action
+            );
+          });
+
+          state.trash = state.trash.map((item) => {
             return createCard(
               item.id,
               item.color,
@@ -40,7 +52,7 @@
           clickListener = createClickListener(document);
 
           clickListener.setPlayer(socket.id);
-          clickListener.subscribe(command => {
+          clickListener.subscribe((command) => {
             socket.emit("player-movement", command);
           });
         });

@@ -14,31 +14,36 @@ body {
   padding: 15px;
 }
 
-#cards > .card {
+#cards > .card,
+#trash > .card {
   display: inline-block;
   width: 90px;
   height: 120px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin: 0 15px 0 0;
+  margin: 0 15px 15px 0;
   vertical-align: top;
   border-radius: 5px;
   background: linear-gradient(25deg, rgb(226, 226, 226), rgb(255, 255, 255));
   position: relative;
 }
 
-#cards > .card.color-blue {
+#cards > .card.color-blue,
+#trash > .card.color-blue {
   color: #0056ff;
 }
 
-#cards > .card.color-yellow {
+#cards > .card.color-yellow,
+#trash > .card.color-yellow {
   color: #b5bb08;
 }
 
-#cards > .card.color-red {
+#cards > .card.color-red,
+#trash > .card.color-red {
   color: #da0000;
 }
 
-#cards > .card.color-green {
+#cards > .card.color-green,
+#trash > .card.color-green {
   color: #2b963a;
 }
 

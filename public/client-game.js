@@ -7,12 +7,21 @@ export default function createClientGame(params, document) {
   const cards = params.cards;
 
   function render() {
-    let cardList = [];
+    console.log(trash);
 
-    if (cards == undefined) return;
+    if (cards != undefined) {
+      let cardList = [];
 
-    cards.forEach((card, i) => cardList.push(card.render(i)));
-    document.getElementById("cards").innerHTML = cardList.join("");
+      cards.forEach((card, i) => cardList.push(card.render(i)));
+      document.getElementById("cards").innerHTML = cardList.join("");
+    }
+
+    if (trash != undefined) {
+      let trashList = [];
+
+      trash.forEach((card, i) => trashList.push(card.render(i)));
+      document.getElementById("trash").innerHTML = trashList.join("");
+    }
   }
 
   return {
