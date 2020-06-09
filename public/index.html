@@ -52,8 +52,12 @@
           clickListener = createClickListener(document);
 
           clickListener.setPlayer(socket.id);
-          clickListener.subscribe((command) => {
+          clickListener.subscribe("cards", (command) => {
             socket.emit("player-movement", command);
+          });
+
+          clickListener.subscribe("buy", (command) => {
+            socket.emit("buy", command);
           });
         });
       });
