@@ -28,7 +28,20 @@ sockets.on("connection", socket => {
     game.removePlayer(socket.id);
   });
 
-  socket.on("player-movement", command => {
+  socket.on("buy", (command) => {
+    let player = game.getPlayer(command.player);
+    let turn_player = game.getPlayer(game.turn);
+
+    if (!player || !turn_player || player.id != turn_player.id)
+      return game.change(sockets);
+
+    player.addCard(dealer.getCard());
+    game.next();
+
+    return game.change(sockets);
+  });
+
+  socket.on("player-movement", (command) => {
     let player = game.getPlayer(command.player);
     let turn_player = game.getPlayer(game.turn);
 
