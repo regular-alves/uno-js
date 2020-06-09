@@ -8,45 +8,51 @@ export default function createClickListener(document) {
     state.player = id;
   }
 
-  function subscribe(func) {
-    state.observers.push(func);
+  function subscribe(list, func) {
+    if (state.observers[list] == undefined) state.observers[list] = [];
+
+    state.observers[list].push(func);
   }
 
-  function trigger(command) {
-    state.observers.forEach(observersFunction => {
+  function trigger(list, command) {
+    if (state.observers[list] == undefined) state.observers[list] = [];
+
+    state.observers[list].forEach((observersFunction) => {
       observersFunction(command);
     });
   }
 
   const cards = document.getElementsByClassName("card");
 
-  console.log(cards.length);
-
   for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener("click", keyPressHandle);
+    cards[i].addEventListener("click", cardPressHandle);
   }
 
-  function keyPressHandle(e) {
-    trigger({
+  document
+    .getElementsByClassName("buy")[0]
+    .addEventListener("click", buyCardPressHandle);
+
+  function buyCardPressHandle(e) {
+    console.log("buy", {
       player: state.player,
-      card: e.target.getAttribute("data-card-index")
+    });
+
+    trigger("buy", {
+      player: state.player,
     });
     return;
+  }
 
-    if (game.trashing(card)) {
-      console.log(turn_player.name, card, " > ", true);
-      game.next();
-    } else {
-      console.log(turn_player.name, card, " > ", false);
-      turn_player.addCard(card);
-    }
-
-    console.log("document.listerner.keyup.after.game > ", game);
-    console.log("\n\n");
+  function cardPressHandle(e) {
+    trigger("cards", {
+      player: state.player,
+      card: e.target.getAttribute("data-card-index"),
+    });
+    return;
   }
 
   return {
     setPlayer,
-    subscribe
+    subscribe,
   };
 }
