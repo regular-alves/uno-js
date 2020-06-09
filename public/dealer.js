@@ -80,6 +80,7 @@ export default function createDealer(cards) {
   }
 
   return {
+    deck,
     discart,
     getCard,
     shuffleCards,
