@@ -60,6 +60,7 @@
             socket.emit("buy", command);
           });
         });
+        socket.on("request-" + socket.id, (params) => game[params.function]());
       });
     </script>
     <div id="game">
@@ -68,6 +69,7 @@
       <ul id="deck"></ul>
       <ul id="trash"></ul>
       <a href="#" class="buy">Comprar carta</a>
+      <a href="#" id="next" class="disabled">Passar</a>
     </div>
   </body>
 </html>

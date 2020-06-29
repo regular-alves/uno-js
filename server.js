@@ -36,6 +36,19 @@ sockets.on("connection", socket => {
       return game.change(sockets);
 
     player.addCard(dealer.getCard());
+
+    game.change(sockets);
+
+    sockets.emit("request-" + player.id, { function: "nextTurnButton" });
+  });
+
+  socket.on("next", (command) => {
+    let player = game.getPlayer(command.player);
+    let turn_player = game.getPlayer(game.turn);
+
+    if (!player || !turn_player || player.id != turn_player.id)
+      return game.change(sockets);
+
     game.next();
 
     return game.change(sockets);

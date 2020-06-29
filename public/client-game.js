@@ -24,6 +24,10 @@ export default function createClientGame(params, document) {
     }
   }
 
+  function nextTurnButton() {
+    document.getElementById("next").classList.remove("disabled");
+  }
+
   return {
     number,
     color,
@@ -31,6 +35,7 @@ export default function createClientGame(params, document) {
     turn,
     trash,
     cards,
-    render
+    render,
+    nextTurnButton,
   };
 }
