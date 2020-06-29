@@ -22,15 +22,19 @@ export default function createClickListener(document) {
     });
   }
 
-  const cards = document.getElementsByClassName("card");
+  function cards() {
+    const cards = document.getElementsByClassName("card");
 
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener("click", cardPressHandle);
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener("click", cardPressHandle);
+    }
   }
 
-  document
-    .getElementsByClassName("buy")[0]
-    .addEventListener("click", buyCardPressHandle);
+  function buyButton() {
+    document
+      .getElementsByClassName("buy")[0]
+      .addEventListener("click", buyCardPressHandle);
+  }
 
   function buyCardPressHandle(e) {
     console.log("buy", {
@@ -58,6 +62,8 @@ export default function createClickListener(document) {
   return {
     setPlayer,
     subscribe,
+    buyButton,
+    cards,
     clearQueue,
   };
 }

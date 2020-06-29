@@ -19,7 +19,7 @@
       var game = createClientGame({}, document);
       var clickListener = createClickListener(document);
 
-      console.log("start.game.players > ", game);
+      clickListener.buyButton();
 
       socket.on("connect", () => {
         socket.on("update-" + socket.id, (state) => {
@@ -49,17 +49,21 @@
 
           game.render();
 
-          clickListener = createClickListener(document);
+          clickListener.cards();
 
           clickListener.setPlayer(socket.id);
+          clickListener.clearQueue("cards");
+
           clickListener.subscribe("cards", (command) => {
             socket.emit("player-movement", command);
           });
-
-          clickListener.subscribe("buy", (command) => {
-            socket.emit("buy", command);
-          });
         });
+
+        clickListener.clearQueue("buy");
+        clickListener.subscribe("buy", (command) => {
+          socket.emit("buy", command);
+        });
+
         socket.on("request-" + socket.id, (params) => game[params.function]());
       });
     </script>
