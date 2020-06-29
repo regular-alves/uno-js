@@ -51,8 +51,13 @@ export default function createClickListener(document) {
     return;
   }
 
+  function clearQueue(list) {
+    state.observers[list] = [];
+  }
+
   return {
     setPlayer,
     subscribe,
+    clearQueue,
   };
 }
