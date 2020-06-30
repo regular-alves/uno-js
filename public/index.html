@@ -20,6 +20,7 @@
       var clickListener = createClickListener(document);
 
       clickListener.buyButton();
+      clickListener.nextButton();
 
       socket.on("connect", () => {
         socket.on("update-" + socket.id, (state) => {
@@ -54,14 +55,25 @@
           clickListener.setPlayer(socket.id);
           clickListener.clearQueue("cards");
 
-          clickListener.subscribe("cards", (command) => {
-            socket.emit("player-movement", command);
-          });
+          if (state.yourTurn) {
+            clickListener.subscribe("cards", (command) => {
+              socket.emit("player-movement", command);
+            });
+            document.getElementById("buy").classList.remove("disabled");
+          } else {
+            document.getElementById("buy").classList.add("disabled");
+            document.getElementById("next").classList.add("disabled");
+          }
         });
 
         clickListener.clearQueue("buy");
         clickListener.subscribe("buy", (command) => {
           socket.emit("buy", command);
+        });
+
+        clickListener.clearQueue("next");
+        clickListener.subscribe("next", (command) => {
+          socket.emit("next", command);
         });
 
         socket.on("request-" + socket.id, (params) => game[params.function]());
@@ -72,8 +84,8 @@
       <ul id="cards"></ul>
       <ul id="deck"></ul>
       <ul id="trash"></ul>
-      <a href="#" class="buy">Comprar carta</a>
-      <a href="#" id="next" class="disabled">Passar</a>
+      <a href="#" id="buy" class="btn">Comprar carta</a>
+      <a href="#" id="next" class="btn disabled">Passar</a>
     </div>
   </body>
 </html>

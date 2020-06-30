@@ -146,6 +146,6 @@ body {
   position: relative;
 }
 
-#next.disabled {
+.btn.disabled {
   display: none;
 }

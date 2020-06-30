@@ -32,8 +32,14 @@ export default function createClickListener(document) {
 
   function buyButton() {
     document
-      .getElementsByClassName("buy")[0]
+      .getElementById("buy")
       .addEventListener("click", buyCardPressHandle);
+  }
+
+  function nextButton() {
+    document
+      .getElementById("next")
+      .addEventListener("click", nextCardPressHandle);
   }
 
   function buyCardPressHandle(e) {
@@ -42,6 +48,17 @@ export default function createClickListener(document) {
     });
 
     trigger("buy", {
+      player: state.player,
+    });
+    return;
+  }
+
+  function nextCardPressHandle(e) {
+    console.log("next", {
+      player: state.player,
+    });
+
+    trigger("next", {
       player: state.player,
     });
     return;
@@ -65,5 +82,6 @@ export default function createClickListener(document) {
     buyButton,
     cards,
     clearQueue,
+    nextButton,
   };
 }

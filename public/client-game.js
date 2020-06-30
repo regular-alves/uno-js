@@ -26,6 +26,7 @@ export default function createClientGame(params, document) {
 
   function nextTurnButton() {
     document.getElementById("next").classList.remove("disabled");
+    document.getElementById("buy").classList.add("disabled");
   }
 
   return {
