@@ -43,12 +43,12 @@ const createGame = function() {
   function change(sockets) {
     players.forEach(player => {
       sockets.emit("update-" + player.id, {
-        number: number,
-        color: color,
-        direction: direction,
-        turn: turn,
-        trash: trash,
-        cards: player.cards
+        number: this.number,
+        color: this.color,
+        direction: this.direction,
+        turn: this.turn,
+        trash: this.trash,
+        cards: player.cards,
       });
     });
   }
