@@ -41,7 +41,8 @@ const createGame = function() {
   }
 
   function change(sockets) {
-    players.forEach(player => {
+    const turn_player = getPlayers()[this.turn];
+    players.forEach((player) => {
       sockets.emit("update-" + player.id, {
         number: this.number,
         color: this.color,
@@ -49,6 +50,7 @@ const createGame = function() {
         turn: this.turn,
         trash: this.trash,
         cards: player.cards,
+        yourTurn: turn_player.id == player.id,
       });
     });
   }
